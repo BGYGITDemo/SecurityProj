@@ -1,0 +1,32 @@
+SQL> select * from users;
+
+UNAME                PWD                      STATUS
+-------------------- -------------------- ----------
+raja                 {noop}rani                    0
+rajesh               {noop}hyd                     1
+karan                {noop}mp                      1
+deepraj              {noop}up                      1
+lokesh               {noop}delhi                   0
+
+SQL> desc users;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ UNAME                                     NOT NULL VARCHAR2(20)
+ PWD                                                VARCHAR2(20)
+ STATUS                                             NUMBER(1)
+
+SQL> select * from user_roles;
+
+ROLE                 UNAME
+-------------------- --------------------
+ROLE_GUEST           raja
+ROLE_ADMIN           rajesh
+ROLE_HR              karan
+ROLE_STAFF           deepraj
+ROLE_VISITOR         lokesh
+
+SQL> desc user_roles;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ROLE                                               VARCHAR2(20)
+ UNAME                                              VARCHAR2(20)
