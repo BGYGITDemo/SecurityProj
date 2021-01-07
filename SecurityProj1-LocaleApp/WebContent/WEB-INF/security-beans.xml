@@ -27,30 +27,29 @@
 			error-page="/access_denied.jsp" />
 		<security:remember-me />
 		<security:session-management>
-			<security:concurrency-control error-if-maximum-exceeded="true" max-sessions="2"/>
+			<security:concurrency-control
+				error-if-maximum-exceeded="true" max-sessions="2" />
 		</security:session-management>
 	</security:http>
 
 	<security:authentication-manager>
 		<!-- taking current spring bean cfg file itself as authentication info 
 			provider -->
-		<!-- <security:authentication-provider>
-			 <security:user-service>
-				<security:user name="raja" password="{noop}rani"
-					authorities="ROLE_MANAGER" disabled="true" locked="true" />
-				<security:user name="rajesh" password="{noop}hyd"
-					authorities="ROLE_ADMIN" />
-				<security:user name="karan" password="{noop}mp"
-					authorities="ROLE_HR" />
-				<security:user name="deepraj" password="{noop}up"
-					authorities="ROLE_STAFF" />
-				<security:user name="lokesh" password="{noop}delhi"
-					authorities="ROLE_VISITOR" />
-			</security:user-service>
-		</security:authentication-provider> -->
-			<!-- taking propeties file as authentiacation provider -->
-			<security:authentication-provider>
-			<security:user-service properties="classpath:com/nt/commons/info.properties"/></security:authentication-provider>
+		<!-- <security:authentication-provider> <security:user-service> <security:user 
+			name="raja" password="{noop}rani" authorities="ROLE_MANAGER" disabled="true" 
+			locked="true" /> <security:user name="rajesh" password="{noop}hyd" authorities="ROLE_ADMIN" 
+			/> <security:user name="karan" password="{noop}mp" authorities="ROLE_HR" 
+			/> <security:user name="deepraj" password="{noop}up" authorities="ROLE_STAFF" 
+			/> <security:user name="lokesh" password="{noop}delhi" authorities="ROLE_VISITOR" 
+			/> </security:user-service> </security:authentication-provider> -->
+		<!-- taking propeties file as authentiacation provider -->
+		<!-- <security:authentication-provider> <security:user-service properties="classpath:com/nt/commons/info.properties"/></security:authentication-provider> -->
+	<security:authentication-provider>
+	<security:jdbc-user-service data-source-ref="ds"
+	                             users-by-username-query="SELECT UNAME,PWD,STATUS FROM USERS WHERE UNAME=?"
+	                             authorities-by-username-query="SELECT UNAME,ROLE FROM USER_ROLES WHERE UNAME=?"/>
+	</security:authentication-provider>
+	
 	</security:authentication-manager>
 
 </beans>
